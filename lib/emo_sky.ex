@@ -8,7 +8,7 @@ defmodule EmoSky do
   """
 
   def config([main_key | rest] = keyspace) when is_list(keyspace) do
-    main = Application.fetch_env!(:paraia, main_key)
+    main = Application.fetch_env!(:emo_sky, main_key)
 
     Enum.reduce(rest, main, fn next_key, current ->
       case Keyword.fetch(current, next_key) do
