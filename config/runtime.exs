@@ -20,6 +20,22 @@ if System.get_env("PHX_SERVER") do
   config :emo_sky, EmoSkyWeb.Endpoint, server: true
 end
 
+blue_sky_user =
+  System.get_env("BLUE_SKY_USER") ||
+    raise """
+    environment variable BLUE_SKY_USER is missing.
+    """
+
+blue_sky_pass =
+  System.get_env("BLUE_SKY_PASS") ||
+    raise """
+    environment variable BLUE_SKY_PASS is missing.
+    """
+
+config :emo_sky, :blue_sky,
+  user: blue_sky_user,
+  pass: blue_sky_pass
+
 if config_env() == :prod do
   database_path =
     System.get_env("DATABASE_PATH") ||
