@@ -46,10 +46,17 @@ defmodule EmoSky.Client.BlueSky.JetStream do
     {:ok, state}
   end
 
-  # def filter_for_posts(%{"commit" => %{"collection" => "app.bsky.feed.repost"}} = msg), do: msg
-  def filter_for_posts(%{"commit" => %{"collection" => "app.bsky.feed.post"}} = msg), do: msg
+  def filter_for_posts(
+        %{"commit" => %{"collection" => "app.bsky.feed.post", "operation" => "create"}} = msg
+      ),
+      do: msg
+
   def filter_for_posts(_), do: nil
 
   def do_something(nil), do: nil
-  def do_something(msg), do: msg |> IO.inspect()
+
+  def do_something(msg) do
+    # Send to analyis checker
+    EmoSky.BlueSky.SkeetProducer.process_skeets([msg])
+  end
 end

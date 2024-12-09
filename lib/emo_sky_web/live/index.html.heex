@@ -1,0 +1,14 @@
+<div id="skeets" phx-update="stream" class="flex flex-col gap-y-6 max-w-5xl mx-auto">
+  <div
+    :for={{id, skeet} <- @streams.skeets}
+    id={id}
+    class={[
+      "p-4 my-4 rounded",
+      skeet.mood == "NEG" && "bg-red-200",
+      skeet.mood == "NEU" && "bg-zinc-200",
+      skeet.mood == "POS" && "bg-green-200"
+    ]}
+  >
+    {skeet.text}
+  </div>
+</div>

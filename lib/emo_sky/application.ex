@@ -16,6 +16,7 @@ defmodule EmoSky.Application do
       {Phoenix.PubSub, name: EmoSky.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: EmoSky.Finch},
+      EmoSky.BlueSky.SkeetPipeline,
       EmoSky.Client.BlueSky.JetStream,
 
       # Start a worker by calling: EmoSky.Worker.start_link(arg)

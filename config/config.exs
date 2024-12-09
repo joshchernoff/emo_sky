@@ -7,6 +7,8 @@
 # General application configuration
 import Config
 
+config :nx, default_backend: EXLA.Backend
+
 config :emo_sky,
   ecto_repos: [EmoSky.Repo],
   generators: [timestamp_type: :utc_datetime, binary_id: true]

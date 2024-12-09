@@ -17,7 +17,7 @@ defmodule EmoSkyWeb.Router do
   scope "/", EmoSkyWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", Live.Index, :index
   end
 
   # Other scopes may use custom stacks.
