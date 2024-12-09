@@ -36,7 +36,8 @@ defmodule EmoSky.Client.BlueSky.JetStream do
     case Jason.decode(msg) do
       {:ok, parsed_msg} ->
         parsed_msg
-        |> dbg()
+        |> filter_for_posts()
+        |> do_something()
 
       {:error, reason} ->
         Logger.error("Failed to decode JSON: #{inspect(reason)}")
@@ -44,4 +45,11 @@ defmodule EmoSky.Client.BlueSky.JetStream do
 
     {:ok, state}
   end
+
+  # def filter_for_posts(%{"commit" => %{"collection" => "app.bsky.feed.repost"}} = msg), do: msg
+  def filter_for_posts(%{"commit" => %{"collection" => "app.bsky.feed.post"}} = msg), do: msg
+  def filter_for_posts(_), do: nil
+
+  def do_something(nil), do: nil
+  def do_something(msg), do: msg |> IO.inspect()
 end
